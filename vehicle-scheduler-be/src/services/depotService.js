@@ -17,7 +17,7 @@ function getApiConfiguration() {
   }
 
   return {
-    url: `${BASE_URL.replace(/\/$/, '')}/evaluation-service/depots`,
+    url: `${BASE_URL.replace(/\/$/, '')}/depots`,
     config: {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -34,7 +34,9 @@ async function getDepots() {
     const { url, config } = getApiConfiguration();
     await safeLog('info', 'Calling protected depots API');
 
+    process.stdout.write(`Depots URL: ${url}\n`);
     const response = await axios.get(url, config);
+    process.stdout.write(`${JSON.stringify(response.data, null, 2)}\n`);
 
     if (!response.data || !Array.isArray(response.data.depots)) {
       throw new Error('Invalid depots API response');

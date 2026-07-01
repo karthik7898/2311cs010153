@@ -17,7 +17,7 @@ function getApiConfiguration() {
   }
 
   return {
-    url: `${BASE_URL.replace(/\/$/, '')}/evaluation-service/vehicles`,
+    url: `${BASE_URL.replace(/\/$/, '')}/vehicles`,
     config: {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
@@ -34,6 +34,7 @@ async function getVehicles() {
     const { url, config } = getApiConfiguration();
     await safeLog('info', 'Calling protected vehicles API');
 
+    process.stdout.write(`Vehicles URL: ${url}\n`);
     const response = await axios.get(url, config);
 
     if (!response.data || !Array.isArray(response.data.vehicles)) {

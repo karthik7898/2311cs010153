@@ -81,7 +81,8 @@ async function getSchedule(req, res) {
 
     return res.status(500).json({
       success: false,
-      message: 'Internal Server Error',
+      message: error.message,
+      stack: error.stack,
     });
   }
 }
